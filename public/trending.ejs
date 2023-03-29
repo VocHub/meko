@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trending - HaiKei</title>
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="stylesheet" href="/css/index-redesign.css">
+</head>
+<body id="full-doc">
+    <%- include("./templates/sidenav.ejs") %>
+    <%- include("./templates/navbar.ejs") %>
+    <div class="trending-items">
+        <h1 class="trending-header">Trending Shows</h1>
+    <div class="recent-releases-grid grid-container">
+        <% trending.forEach(card => { %>
+            <li class="splide__slide">
+                <a aria-label="<%- card.episodeId %>" class="searchLink" href="/watch/<%- card.id %>/1"></a>
+                <img src="<%- card.image %>" style="width: 164px; height: 231px; align-self: center"> 
+                <p class="splide__animeTitle"><%- card.title.romaji %></p>
+                <br>
+                <p class="splide__episodeNum"><%= card.genres[0 + 1] %></p>
+            </li>
+        <% }) %>
+        <% trending2.forEach(card => { %>
+            <li class="splide__slide">
+                <img src="<%- card.image %>" style="width: 164px; height: 231px; align-self: center"> 
+                <p class="splide__animeTitle"><%- card.title.romaji %></p>
+                <br>
+                <p class="splide__episodeNum"><%= card.genres[0 + 1] %></p>
+            </li>
+        <% }) %>
+    </div>
+</div>
+    <script src="https://code.jquery.com/jquery-3.6.3.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/izimodal/1.6.1/js/iziModal.min.js" integrity="sha512-lR/2z/m/AunQdfBTSR8gp9bwkrjwMq1cP0BYRIZu8zd4ycLcpRYJopB+WsBGPDjlkJUwC6VHCmuAXwwPHlacww==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="/js/modals.js"></script>
+</body>
+</html>

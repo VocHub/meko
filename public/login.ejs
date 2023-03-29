@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>HaiKei | Login</title>
+		<link rel="stylesheet" href="/css/base.css">
+		<link rel="stylesheet" href="/css/index.css">
+		<link rel="stylesheet" href="/css/login.css">
+        <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.2.0/css/all.css">
+	</head>
+	<body>
+		<section class="prompt">
+			<h3>HaiKei</h3>
+			<h1>Sign in</h1>
+			<% if (message) { %>
+			<section class="messages">
+				<p><%= message %></p>
+			</section>
+			<% } %>
+			<form action="/login/password" method="post">
+				<section>
+					<label for="username">Username</label>
+					<input id="username" name="username" type="text" autocomplete="username" required autofocus>
+				</section>
+				<section>
+					<label for="new-password">Password</label>
+					<input id="new-password" name="password" type="password" autocomplete="new-password" required><i id="togglePassword" class="fa-solid fa-eye-slash"></i>
+                </section>
+				<button id="complete_login" type="submit">Sign in</button>
+			</form>
+			<hr>
+			<p class="help">Don't have an account? <a href="/signup">Sign up</a></p>
+		</section>
+	    <script src="/js/login.js"></script>
+    </body>
+</html>

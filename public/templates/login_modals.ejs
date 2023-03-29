@@ -1,0 +1,281 @@
+<% if (loginState == true) { %>
+        <div class="modal fade premodal premodal-login" id="modalUserInfo" tabindex="-1" role="dialog"
+            aria-labelledby="modallogintitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="tab-content">
+
+                        <div id="modal-tab-userinfo" class="tab-pane active">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="modallogintitle">Welcome back, <%- username %>!</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span style="bottom: 5%; left: 25%; position: absolute;" aria-hidden="true">×</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                                            
+                            <h5 style="text-align: center;">Account Info</h5>
+
+                            <h6 style="text-align: center;">Username: <%- username %></h6>
+                            <br>
+                            <div style="display: flex; justify-content: center; flex-direction: column; text-align: center;" class="input-wrapper">
+                            <label style="margin-bottom: 0; margin-right: 5px;" for="videoSource">Video Source:</label>
+                            <select class="videoSourceSelector" name="videoSource" id="videoSource">
+                                <option id="gogoanime" value="gogoanime">Gogoanime</option>
+                                <option id="zoro" value="zoro">Zoro</option>
+                            </select>
+                            <br>
+                            <label style="margin-bottom: 0; margin-right: 5px;" for="videoSource">Enable Ads:</label>
+                            <select class="adSelector" name="adSelector" id="adSelector">
+                                <option id="ads-enabled" value="false">Ads Enabled (supports the creator!)</option>
+                                <option id="ads-disabled" value="true">Ads Disabled</option>
+                            </select>
+                            </div>
+                            <br>
+                            <form method="POST" action="/logout">
+                                <button type="submit" class="btn btn-block btn-logout">Logout</button>
+                                <input type="hidden" name="returnURL" value="<%= url %>">
+                            </form>
+                            </div>
+                        </div>
+                        <div id="modal-tab-forgot" class="tab-pane fade">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="modallogintitle3">Reset Password</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">×</span>
+                                </button>
+                            </div>
+                            <div class="modal-body" style="padding-bottom: 20px;">
+                                <form class="preform" action="/signup">
+                                    <div class="form-group">
+                                        <label class="prelabel" for="forgot-email">Your Email</label>
+                                        <input type="text" class="form-control" id="forgot-email"
+                                            placeholder="name@email.com" disabled>
+                                    </div>
+                                    <div class="form-group login-btn mb-0">
+                                        <a href="#" class="btn btn-primary btn-block" disabled>Forgot your
+                                            password</a>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="modal-footer text-center">
+                                <a class="link-highlight login-tab-link" title=""><i
+                                        class="fas fa-angle-left mr-2"></i>Back to
+                                    Sign-in</a>
+                            </div>
+                        </div>
+
+                        <div id="modal-tab-register" class="tab-pane fade">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="modallogintitle2">Create an Account</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">×</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="alert alert-danger mb-5" id="register-error" style="display: none;"></div>
+                                <form class="preform" method="post" action="/signup" id="register-forms">
+                                    <div class="form-group">
+                                        <label class="prelabel" for="re-email">Email Address</label>
+                                        <input type="email" class="form-control" id="re-email" 
+                                            placeholder="example@example.com" name="email" required="">
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="prelabel" for="re-username">Username</label>
+                                        <input type="text" class="form-control" id="re-username" 
+                                            placeholder="Alice" name="username" required="">
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="prelabel" for="re-password">Password</label>
+                                        <input type="password" autocomplete="on" class="form-control" id="re-password" placeholder="Password" name="password" required="">
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="prelabel" for="re-confirmpassword">Confirm Password</label>
+                                        <input type="password" autocomplete="off" class="form-control" id="re-confirmpassword" 
+                                            placeholder="Confirm Password" name="confirm_password" required="">
+                                    </div>
+                                    <div class="mt-4">&nbsp;</div>
+                                    <div class="form-group login-btn mb-0">
+                                        <button id="btn-registers" type="submit" class="btn btn-primary btn-block">Register</button>
+                                        <div class="loading-relative" id="register-loading" style="display: none;">
+                                            <div class="loading">
+                                                <div class="span1"></div>
+                                                <div class="span2"></div>
+                                                <div class="span3"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="modal-footer text-center">
+                                Have an account? <a class="link-highlight login-tab-link" title="Login">Login</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+<% } else { %>
+        <div class="modal fade premodal premodal-login" id="modallogin" tabindex="-1" role="dialog"
+            aria-labelledby="modallogintitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="tab-content">
+
+                        <div id="modal-tab-login" class="tab-pane active">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="modallogintitle">Welcome back</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">×</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="alert alert-danger mb-5" id="login-error" style="display: none;"></div>
+                                <form method="POST" class="preform" id="login-forms" action="/login/password">
+                                    <div class="form-group">
+                                        <label class="prelabel" for="username">Username</label>
+                                        <input type="text" class="form-control" id="username" placeholder="Alice" name="username" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="prelabel" for="password">Password</label>
+                                        <input type="password" autocomplete="on" class="form-control" id="password" placeholder="Password" name="password" required>
+                                        <input type="hidden" name="returnURL" value="<%= url %>">
+                                    </div>
+                                    <div class="form-check custom-control custom-checkbox">
+                                        <div class="float-left">
+                                            <input value="true" name="remember" type="checkbox" class="custom-control-input" id="remember">
+                                            <label for="remember" class="custom-control-label">Remember me</label>
+                                        </div>
+                                        <div class="float-right">
+                                            <a href="#" class="link-highlight text-forgot forgot-tab-link">Forgot
+                                                password?</a>
+                                        </div>
+                                        <div class="clearfix"></div>
+                                    </div>
+                                    <div class="mt-4">&nbsp;</div>
+                                    <div class="form-group login-btn mb-0">
+                                        <button id="btn-logins" type="submit" class="btn btn-primary btn-block">Login</button>
+                                        <div class="loading-relative" id="login-loading" style="display: none;">
+                                            <div class="loading">
+                                                <div class="span1"></div>
+                                                <div class="span2"></div>
+                                                <div class="span3"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="modal-footer text-center">
+                                Don't have an account? <a class="link-highlight register-tab-link"
+                                    title="Register">Register</a>
+                            </div>
+                        </div>
+
+
+                        <div id="modal-tab-forgot" class="tab-pane fade">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="modallogintitle3">Reset Password</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">×</span>
+                                </button>
+                            </div>
+                            <div class="modal-body" style="padding-bottom: 20px;">
+                                <form class="preform" action="/signup">
+                                    <div class="form-group">
+                                        <label class="prelabel" for="forgot-email">Your Email</label>
+                                        <input type="email" class="form-control" id="forgot-email"
+                                            placeholder="name@email.com" disabled>
+                                    </div>
+                                    <div class="form-group login-btn mb-0">
+                                        <a href="#" class="btn btn-primary btn-block" disabled>Forgot your
+                                            password</a>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="modal-footer text-center">
+                                <a class="link-highlight login-tab-link" title=""><i
+                                        class="fas fa-angle-left mr-2"></i>Back to
+                                    Sign-in</a>
+                            </div>
+                        </div>
+
+                        <div id="modal-tab-register" class="tab-pane fade">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="modallogintitle2">Create an Account</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">×</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="alert alert-danger mb-5" id="register-error" style="display: none;"></div>
+                                <form class="preform" method="post" action="/signup" id="register-forms">
+                                    <div class="form-group">
+                                        <label class="prelabel" for="re-email">Email Address</label>
+                                        <input type="email" class="form-control" id="re-email" 
+                                            placeholder="example@example.com" name="email" required="">
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="prelabel" for="re-username">Username</label>
+                                        <input type="text" class="form-control" id="re-username" placeholder="Alice" name="username" required="">
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="prelabel" for="re-password_2">Password</label>
+                                        <input type="password" class="form-control" id="re-password_2" autocomplete="off" placeholder="Password" name="password" required="">
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="prelabel" for="re-confirmpassword">Confirm Password</label>
+                                        <input type="password" autocomplete="off" class="form-control" id="re-confirmpassword" placeholder="Confirm Password" name="confirm_password" required="">
+                                    </div>
+                                    <div class="mt-4">&nbsp;</div>
+                                    <div class="form-group login-btn mb-0">
+                                        <button id="btn-registers" type="submit" class="btn btn-primary btn-block">Register</button>
+                                        <div class="loading-relative" id="register-loading" style="display: none;">
+                                            <div class="loading">
+                                                <div class="span1"></div>
+                                                <div class="span2"></div>
+                                                <div class="span3"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="modal-footer text-center">
+                                Have an account? <a class="link-highlight login-tab-link" title="Login">Login</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+<% } %>
+<% if (loginState == true) { %>
+    <script>
+        let vidSource = localStorage.getItem('videoSource')
+        if (vidSource === undefined || vidSource === null || vidSource.length === 0) {
+           localStorage.setItem('videoSource', "gogoanime")
+        }
+        
+        let continueWatching = localStorage.getItem('continueWatching')
+        if (continueWatching === undefined || continueWatching === null || continueWatching.length === 0) {
+           localStorage.setItem('continueWatching', "")
+        }
+        document.getElementById('videoSource').addEventListener("change", () => {
+            localStorage.setItem('videoSource', event.target.value)
+            window.location.reload()
+        })
+        let isAds = localStorage.getItem('_noads')
+        if (isAds === undefined || isAds === null || isAds.length === 0) {
+           localStorage.setItem('_noads', "false")
+        }
+        document.getElementById('adSelector').addEventListener("change", () => {
+            localStorage.setItem('_noads', event.target.value)
+            window.location.reload()
+        })
+        if (isAds == "true") {
+            document.getElementById('ads-disabled').selected = "selected"
+        } else {
+            document.getElementById('ads-enabled').selected = "selected"
+        }
+    
+    </script>
+<% } %>

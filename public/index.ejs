@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Watch anime for free at HaiKei.xyz! Watch One Piece, Demon Slayer, Dragon Ball, Nier Automata, Miss Kobayashi's Dragon Maid and more at HaiKei.xyz!">
+    <meta property="og:title" content="Home - HaiKei.xyz" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://haikei.xyz" />
+    <meta property="og:description" content="Watch anime for completely free online at haikei.xyz! No ads forever!" />
+    <meta property="og:image" content="/img/logo.png" />
+    <title>Home - HaiKei</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://site-assets.fontawesome.com">
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="stylesheet" href="/css/index-redesign.css">
+    <link rel="stylesheet" href="/vendor/swiper.js/swiper-bundle.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9870376562547077" crossorigin="anonymous"></script>
+</head>
+<body id="full-doc">
+    <%- include("./templates/sidenav.ejs") %>
+    <%- include("./templates/navbar.ejs") %>
+    <div class="swiper">
+    <div class="swiper-wrapper">
+        <% trendingAnime.forEach(card => { %>
+            <div class="swiper-slide">
+                <div loading="lazy" class="background-image" style="background-image: url('<%- `https://img.haikei.xyz/image/` + encodeURIComponent(card.image) %>')"></div>
+                <div class="show-info">
+                    <h1 class="title hidden jp-title"><%- card.title.romaji %></h1>
+                    <h1 class="title eng-title"><%- card.title.english %></h1>
+                    <div class="description">
+                        <% if (card.description !== null) { %>
+                            <%- card.description.replace(/(Source:.*)/m, "").replace("(", "") %>
+                        <% } else { %>
+                            <%- card.description = "No description found!" %>
+                        <% } %>
+                    </div>
+                    <div class="emblem-info">
+                        <% if (card.status == "Completed") { %>
+                            <div class="status"><i class="fa-solid fa-check"></i> <%- card.status %></div>
+                        <% } else { %>
+                            <div class="status"><i class="fa-regular fa-clock"></i> <%- card.status %></div>
+                        <% } %>
+                        
+                        <div class="release-date"><i class="fa-regular fa-calendar"></i> <%- card.releaseDate %></div>
+                        <div class="type"><i class="fa-light fa-tv-retro"></i> <%- card.type %></div>
+                    </div>
+                    <div class="btn-wrapper">
+                        <div class="play-btn"><a href="/watch/<%- card.id %>/1"><i class="fa-solid fa-play"></i> Play Now</a></div>
+                    </div>
+                </div>
+            </div>
+        <% }) %> 
+    </div>
+    <div class="swiper-pagination"></div>
+    </div>
+    <br>
+    <div align="center">
+        <ins class="adsbygoogle" style="display:block" data-ad-format="fluid" data-ad-layout-key="-d9+i-1g-4q+e1" data-ad-client="ca-pub-9870376562547077" data-ad-slot="9808535270"></ins>
+    </div>
+    <div class="new-releases">
+        <div class="recent-releases-grid grid-container">
+            <% recentReleases.forEach(card => { %>
+                <div class="splide__slide">
+                <a aria-label="<%- card.episodeId %>" class="searchLink" href="/watch/<%- card.id %>/1"></a>
+                    <img class="recent_releases_img" src="<%- `https://img.haikei.xyz/image/` + encodeURIComponent(card.image) %>" alt="<%- card.title.romaji %>" style="width: 153px; height: 218px; align-self: center"> 
+                    <p class="splide__animeTitle recent_releases_title"><%- card.title.romaji %></p>
+                    <p class="splide__episodeNum">Episode: <%- card.episodeNumber %></p>
+                </div>
+            <% }) %>
+        </div>
+    </div>
+<div align="center">
+    <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-9870376562547077" data-ad-slot="3343329158" data-ad-format="auto" data-full-width-responsive="true"></ins>
+    <br>
+    <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-9870376562547077" data-ad-slot="8345843007" data-ad-format="auto" data-full-width-responsive="true"></ins>
+    <br>
+    <ins class="adsbygoogle" style="display:block" data-ad-format="autorelaxed" data-ad-client="ca-pub-9870376562547077" data-ad-slot="7895320825"></ins>
+</div>
+<script>
+// ensure that ads only show on the main domains
+if (window.location.hostname == "haikei.xyz" || window.location.hostname == "www.haikei.xyz") {
+    if (localStorage.getItem("_noads") == 'false') {
+        (adsbygoogle = window.adsbygoogle || []).push({});
+        (adsbygoogle = window.adsbygoogle || []).push({});
+        (adsbygoogle = window.adsbygoogle || []).push({});
+        (adsbygoogle = window.adsbygoogle || []).push({});
+    } else {
+        let ads = document.getElementsByClassName("adsbygoogle")
+        for(let i = 0; i < ads.length; i++) {
+            ads[i].style.display = "none"
+        }
+    }
+} else {
+    let ads = document.getElementsByClassName("adsbygoogle")
+    for(let i = 0; i < ads.length; i++) {
+        ads[i].style.display = "none"
+    }
+}
+</script>
+
+<%- include("./templates/user-modals.ejs") %>
+<%- include('./templates/new-footer.ejs') %>
+
+<script src="https://code.jquery.com/jquery-3.6.3.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/izimodal/1.6.1/js/iziModal.min.js" integrity="sha512-lR/2z/m/AunQdfBTSR8gp9bwkrjwMq1cP0BYRIZu8zd4ycLcpRYJopB+WsBGPDjlkJUwC6VHCmuAXwwPHlacww==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/8.4.5/swiper-bundle.min.js" integrity="sha512-wdUM0BxMyMC/Yem1RWDiIiXA6ssXMoxypihVEwxDc+ftznGeRu4s9Fmxl8PthpxOh5CQ0eqjqw1Q8ScgNA1moQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>   
+<script src="/js/index.js"></script>
+<script src="/js/modals.js"></script>
+<script src="/js/app.js"></script>
+<% if(loginState == true) { %>
+<script>
+    let vidSource = localStorage.getItem('videoSource')
+    if (vidSource === undefined || vidSource === null || vidSource.length === 0) {
+       localStorage.setItem('videoSource', "gogoanime")
+    }
+    
+    let continueWatching = localStorage.getItem('continueWatching')
+    if (continueWatching === undefined || continueWatching === null || continueWatching.length === 0) {
+       localStorage.setItem('continueWatching', "")
+    }
+    document.getElementById('videoSource').addEventListener("change", () => {
+        localStorage.setItem('videoSource', event.target.value)
+        window.location.reload()
+    })
+    let isAds = localStorage.getItem('_noads')
+    if (isAds === undefined || isAds === null || isAds.length === 0) {
+       localStorage.setItem('_noads', "false")
+    }
+    document.getElementById('adSelector').addEventListener("change", () => {
+        localStorage.setItem('_noads', event.target.value)
+        window.location.reload()
+    })
+    if (isAds == "true") {
+        document.getElementById('ads-disabled').selected = "selected"
+    } else {
+        document.getElementById('ads-enabled').selected = "selected"
+    }
+    let getVids;
+    if (vidSource == "zoro") {
+        document.getElementById('zoro').selected = "selected" 
+    } else {
+        document.getElementById('gogoanime').selected = "selected"  
+    }
+</script>
+<% } %>
+</body>
+</html>
